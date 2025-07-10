@@ -9,8 +9,45 @@ const packs = {
         backspace1: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/OperaGX/backspace.mp3"),
         allowedKeys: []
     },
-    "osu": {
-        caps: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/osu/key-caps.mp3"),
+    "Balatro": {
+        caps1: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/multihit1.ogg"),
+        caps2: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/multihit2.ogg"),
+        enter1: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/button.ogg"),
+        backspace1: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/crumple1.ogg"),
+        backspace2: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/crumple2.ogg"),
+        backspace3: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/crumple3.ogg"),
+        backspace4: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/crumple4.ogg"),
+        arrow: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/generic1.ogg"),
+        click1: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/voice1.ogg"),
+        click2: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/voice2.ogg"),
+        click3: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/voice3.ogg"),
+        click4: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/voice4.ogg"),
+        click5: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/voice5.ogg"),
+        click6: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/voice6.ogg"),
+        click7: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/voice7.ogg"),
+        click8: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/voice8.ogg"),
+        click9: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/voice9.ogg"),
+        click10: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/voice10.ogg"),
+        click11: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/voice11.ogg"),
+        space1: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/card1.ogg"),
+        space2: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/card3.ogg"),
+        space3: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/cardSlide1.ogg"),
+        space4: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/cardSlide2.ogg"),
+        space5: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/cardFan2.ogg"),
+        shift1: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/multihit1.ogg"),
+        shift2: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/balatro/multihit2.ogg"),
+        allowedKeys: [
+            "CapsLock",
+            "ArrowUp",
+            "ArrowRight",
+            "ArrowLeft",
+            "ArrowDown",
+            "ShiftLeft",
+            "ShiftRight"
+        ]
+    },
+    "osu!": {
+        caps1: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/osu/key-caps.mp3"),
         enter1: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/osu/key-confirm.mp3"),
         backspace1: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/osu/key-delete.mp3"),
         arrow: new Audio("https://github.com/yuukidesu9/KeyboardSounds/raw/main/sounds/osu/key-movement.mp3"),
@@ -208,8 +245,10 @@ const keydown = (e: KeyboardEvent) => {
             space.play();
             break;
         case "CapsLock":
-            currentPack.caps.currentTime = 0;
-            currentPack.caps.play();
+            const capsSoundsCount = Object.keys(currentPack).filter(key => key.startsWith("caps")).length;
+            const caps = currentPack[`caps${Math.floor(Math.random() * capsSoundsCount) + 1}`];
+            caps.currentTime = 0;
+            caps.play();
             break;
         case "ArrowUp":
         case "ArrowRight":
@@ -217,6 +256,13 @@ const keydown = (e: KeyboardEvent) => {
         case "ArrowDown":
             currentPack.arrow.currentTime = 0;
             currentPack.arrow.play();
+            break;
+        case "ShiftLeft":
+        case "ShiftRight":
+            const shiftSoundsCount = Object.keys(currentPack).filter(key => key.startsWith("shift")).length;
+            const shift = currentPack[`shift${Math.floor(Math.random() * shiftSoundsCount) + 1}`];
+            shift.currentTime = 0;
+            shift.play();
             break;
         default:
             const clickSoundsCount = Object.keys(currentPack).filter(key => key.startsWith("click")).length;
